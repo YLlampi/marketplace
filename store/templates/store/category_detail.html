@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block title %}{{ category.title }}{% endblock title %}
+
+{% comment %}
+{% block content %}
+    <h1 class="text-2xl">{{ category.title }}</h1>
+    <form method="POST" action=".">
+        {% csrf_token %}
+        <div class="flex space-x-4 items-center">
+            <label>Filtrar por departamento</label>
+            {{ form.as_p }}
+            <button class="py-1 px-8 bg-orange-800 text-white hover:bg-orange-500">Filtrar</button>
+        </div>
+    </form>
+    {% include 'store/partials/products.html' %}
+
+{% endblock content %}
+{% endcomment %}
+
+{% block content %}
+
+
+    <section>
+        <div class="container">
+            <div class="row">
+                {% include 'core/includes/categories.html' %}
+
+                <div class="col-sm-9 padding-right">
+                    <div class="features_items"><!--features_items-->
+                        <h2 class="title text-center">{{ category.title }}</h2>
+                        {% include 'store/partials/products.html' %}
+
+                    </div><!--features_items-->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% comment %}
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+            <form method="POST" action=".">
+                {% csrf_token %}
+                <div class="flex space-x-4 items-center">
+                    <label>Filtrar por departamento</label>
+                    {{ form.as_p }}
+                    <button class="py-1 px-8 bg-orange-800 text-white hover:bg-orange-500">Filtrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endcomment %}
+
+{% endblock content %}
+
+

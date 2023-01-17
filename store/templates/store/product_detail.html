@@ -1,0 +1,115 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ product.title }}{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            {% include 'core/includes/categories.html' %}
+
+            <div class="col-sm-9 padding-right">
+                <div class="product-details"><!--product-details-->
+                    <div class="col-sm-5">
+                        <div class="view-product">
+                            <img src="{{ product.get_image_url }}" alt="Imagen de {{ product.title }}"/>
+                            <h3>ZOOM</h3>
+                        </div>
+                        <div id="similar-product" class="carousel slide" data-ride="carousel">
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <a href=""><img src="{{ product.get_image_url }}" alt=""></a>
+                                    <a href=""><img src="{{ product.get_image_two_url }}" alt=""></a>
+                                    <a href=""><img src="{{ product.get_image_three_url }}" alt=""></a>
+                                </div>
+                                <div class="item">
+                                    <a href=""><img src="{{ product.get_image_url }}" alt=""></a>
+                                    <a href=""><img src="{{ product.get_image_two_url }}" alt=""></a>
+                                    <a href=""><img src="{{ product.get_image_three_url }}" alt=""></a>
+                                </div>
+                                <div class="item">
+                                    <a href=""><img src="{{ product.get_image_url }}" alt=""></a>
+                                    <a href=""><img src="{{ product.get_image_two_url }}" alt=""></a>
+                                    <a href=""><img src="{{ product.get_image_three_url }}" alt=""></a>
+                                </div>
+
+                            </div>
+
+                            <!-- Controls -->
+                            <a class="left item-control" href="#similar-product" data-slide="prev">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a class="right item-control" href="#similar-product" data-slide="next">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="product-information"><!--/product-information-->
+                            <img src="{% static 'core/images/product-details/new.jpg' %}" class="newarrival" alt=""/>
+                            <h2>{{ product.title }}</h2>
+                            <p>Web ID: 14045{{ product.id }}</p>
+                            <img src="{% static 'core/images/product-details/rating.png' %}" alt=""/>
+                            <br>
+                            <span>
+                                <span>S/ {{ product.get_display_price }}</span>
+                                {% comment %}
+                                <label>Cantidad:</label>
+                                <input type="text" value="1"/>
+                                {% endcomment %}
+                                <div class="">
+                                    {% if request.user.is_authenticated %}
+                                        <a href="https://api.whatsapp.com/send?phone={{ user_vendor.num_whatsapp }}&text={{ mensaje_send }}{{ product_info }}{{ mensaje_2_send }}" target="_blank">
+                                        <button class="btn btn-fefault cart"><i class="fa fa-shopping-cart"></i>
+                                            Comprar Ahora
+                                        </button>
+                                        </a>
+                                    {% else %}
+                                        <input type="hidden" value="{{ next }}" name="next">
+                                        <a href="{% url 'login' %}">
+                                            <button class="btn btn-fefault cart"><i class="fa fa-shopping-cart"></i>
+                                                Comprar Ahora
+                                            </button>
+                                        </a>
+
+                                    {% endif %}
+                                    <a href="{% url 'add_to_cart' product.id %}">
+                                        <button class="btn btn-fefault cart" style="background: #FE980F"><i
+                                                class="fa fa-shopping-cart"></i>
+                                            Añadir al carrito
+                                        </button>
+                                    </a>
+                                </div>
+
+                            </span>
+                            <p><b>Disponibilidad:</b> {{ product.quantity }}</p>
+                            <p><b>Condición:</b> Nuevo</p>
+                            <p><b>Vendedor:</b> <a
+                                    href="{% url 'vendor_detail' product.user.id %}">{% firstof product.user.get_full_name product.user.username %}</a>
+                            </p>
+                            <a href=""><img src="{% static 'core/images/product-details/share.png' %}"
+                                            class="share img-responsive" alt=""/></a>
+                            <hr>
+                            <h2>Detalles del Producto</h2>
+                            <p>
+                                {{ product.description }}
+                            </p>
+                        </div><!--/product-information-->
+                    </div>
+                </div><!--/product-details-->
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block js %}
+    <script>
+
+    </script>
+{% endblock js %}

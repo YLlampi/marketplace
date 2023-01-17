@@ -1,0 +1,26 @@
+{% load static %}
+{% load menu %}
+
+<div class="col-sm-3">
+    <div class="left-sidebar">
+        <h2>Filtrar por Región</h2>
+        <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+            <form method="POST" action=".">
+                {% csrf_token %}
+                <div class="flex space-x-4 items-center">
+                    {{ form.as_p }}
+                    <button class="btn btn-default get center-block">Filtrar</button>
+                </div>
+            </form>
+        </div><!--/category-products-->
+        <h2>Categorias</h2>
+        <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+            {% menu %}
+        </div><!--/category-products-->
+
+        <div class="shipping text-center"><!--shipping-->
+            <img src="{% static 'core/images/home/shipping.jpg' %}" alt=""/>
+        </div><!--/shipping-->
+
+    </div>
+</div>

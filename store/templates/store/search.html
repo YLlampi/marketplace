@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Search{% endblock title %}
+
+{% block content %}
+
+
+    <section>
+        <div class="container">
+            <div class="row">
+                {% include 'core/includes/categories.html' %}
+
+                <div class="col-sm-9 padding-right">
+                    <div class="features_items"><!--features_items-->
+                        <h2 class="title text-center">Recien Llegados</h2>
+                        <div class="mainmenu">
+                            <ul>
+                                <li><a href="#">Search</a></li>
+                                <li><a href="#">Search result for "{{ query }}":</a></li>
+                            </ul>
+                        </div>
+
+
+                        {% if products %}
+                            {% include 'store/partials/products.html' %}
+                        {% else %}
+                            <p>No hay productos que coincidan con esa búsqueda..!</p>
+                        {% endif %}
+
+                    </div><!--features_items-->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Contactar con el vendedor{% endblock title %}
+
+{% block content %}
+
+    <h1 class="mb-6 text-2xl">Contactar con el vendedor</h1>
+
+    <h2>Lista de Vendedores</h2>
+    <br>
+
+    {% for whatsapp, items in lista_items.items %}
+        <div class="mt-4 border-4 border-gray-900">
+            <a href="https://api.whatsapp.com/send?phone={{ whatsapp }}&text=
+                    {{ mensaje_send }}{% for i in items %}%0A{{ i }}{% endfor %}{{ mensaje_2_send }}" target="_blank"
+               class="py-2 px-4 bg-teal-800 text-white rounded-xl hover:bg-teal-900">Contactar vendedor
+                # {{ forloop.counter }}</a>
+            {% for i in items %}
+                <div class="mt-4 px-4 py-4 mb-2 bg-teal-100 flex items-center">
+                    <h3>{{ i }}</h3>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% endfor %}
+
+
+    {% comment %}
+    {% for whatsapp, items in lista_items.items %}
+        <a href="https://api.whatsapp.com/send?phone={{ whatsapp }}&text={{ mensaje_send }}{{ items }}" target="_blank"
+           class="py-2 px-4 bg-teal-800 text-white rounded-xl hover:bg-teal-900">Contactar vendedor # {{ forloop.counter }}</a>
+        {% for i in items %}
+            <div class="px-4 py-4 mb-2 bg-teal-100 flex items-center">
+                <h3>{{ i }}</h3>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% endcomment %}
+
+    <h2 class="text-xl text-gray-500">Total cost: S/ {{ cart.get_total_cost }}</h2>
+
+    {% comment %}
+    <form method="POST" action=".">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <a href="#"></a>
+        <button class="inline-block px-8 py-4 bg-teal-800 text-white">
+            Checkout
+        </button>
+    </form>
+    {% endcomment %}
+{% endblock content %}
